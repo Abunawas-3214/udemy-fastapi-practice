@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Header, Cookie, Form
 from fastapi.responses import PlainTextResponse, Response
 from typing import Optional
+import time
 
 router = APIRouter(
     prefix="/product",
@@ -9,13 +10,19 @@ router = APIRouter(
 
 products = ['watch', 'phone', 'laptop']
 
+async def time_consuming_function():
+    time.sleep(5)
+    return "ok"
+
 @router.post('/new')
 def create_product(name:str = Form(...)):
     products.append(name)
     return products
 
 @router.get('/all')
-def get_all_products():
+async def get_all_products():
+    await time_consuming_function
+    # Return all products
     data = ", ".join(products)
     response = Response(content=data, media_type="text/plain")
     response.set_cookie(key="products_cookie", value="products_cookie_value")
