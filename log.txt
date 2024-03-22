@@ -1,0 +1,7 @@
+MyAPI: Call to get all products
+MyApp: 
+	http://127.0.0.1:8000/dependencies?test=teest&separator=%24%24&tags=MyApp
+MyApp Triall: a message
+	http://127.0.0.1:8000/dependencies?test=teest&separator=---&tags=MyApp%20Triall&message=a%20message
+MyApp: 
+	http://127.0.0.1:8000/dependencies/new?tags=MyApp&separator=%2A%2A
